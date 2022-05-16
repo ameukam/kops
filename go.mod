@@ -124,7 +124,7 @@ require (
 	google.golang.org/api v0.0.0-20181220000619-583d854617af
 	gopkg.in/gcfg.v1 v1.2.0
 	gopkg.in/inf.v0 v0.9.1
-	gopkg.in/yaml.v2 v2.2.2
+	gopkg.in/yaml.v2 v2.2.8
 	honnef.co/go/tools v0.0.1-2019.2.3
 	k8s.io/api v0.0.0
 	k8s.io/apimachinery v0.0.0

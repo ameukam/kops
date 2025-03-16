@@ -62,6 +62,10 @@ type UpdatePatchBaselineInput struct {
 	Description *string
 
 	// A set of global filters used to include patches in the baseline.
+	//
+	// The GlobalFilters parameter can be configured only by using the CLI or an
+	// Amazon Web Services SDK. It can't be configured from the Patch Manager console,
+	// and its value isn't displayed in the console.
 	GlobalFilters *types.PatchFilterGroup
 
 	// The name of the patch baseline.
@@ -228,6 +232,9 @@ func (c *Client) addOperationUpdatePatchBaselineMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePatchBaselineValidationMiddleware(stack); err != nil {

@@ -52,11 +52,16 @@ kops-acquire-latest
 # - Networking: Cilium with Gateway API enabled
 # - Nodes: c5.large (we need some non-GPU nodes for non-GPU workloads)
 # - NVIDIA driver and runtime are managed by GPU Operator (not kOps)
+# - cluster-autoscaler: For cluster autoscaling with GPU nodes
+# - metrics-server: For HPA support
 OVERRIDES="${OVERRIDES-} --networking=cilium"
 OVERRIDES="${OVERRIDES} --set=cluster.spec.networking.cilium.gatewayAPI.enabled=true"
 OVERRIDES="${OVERRIDES} --node-size=c5.large"
 OVERRIDES="${OVERRIDES} --node-count=2"
 OVERRIDES="${OVERRIDES} --zones=us-east-2a,us-east-2b,us-east-2c"
+OVERRIDES="${OVERRIDES} --set=cluster.spec.clusterAutoscaler.enabled=true"
+OVERRIDES="${OVERRIDES} --set=cluster.spec.metricsServer.enabled=true"
+OVERRIDES="${OVERRIDES} --set=cluster.spec.certManager.enabled=true"
 
 kops-up
 

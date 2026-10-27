@@ -22,8 +22,6 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-
-	"golang.org/x/exp/constraints"
 )
 
 // Literal represents a literal in terraform syntax
@@ -87,7 +85,12 @@ func LiteralTokens(tokens ...string) *Literal {
 	}
 }
 
-func LiteralFromIntValue[T constraints.Integer](i T) *Literal {
+type integer interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+		~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr
+}
+
+func LiteralFromIntValue[T integer](i T) *Literal {
 	return &Literal{
 		String: fmt.Sprintf("%d", i),
 	}
